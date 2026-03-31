@@ -3,245 +3,243 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MARCUS // 6ICW HUB</title>
+    <title>Marcus Lambrechts | Portfolio 6ICW</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Fira+Code:wght@300;500&display=swap');
-
         :root {
-            --neon: #00f2ff;
-            --neon-pink: #ff00ea;
-            --bg: #030303;
-            --card-bg: rgba(10, 10, 15, 0.8);
-            --text: #ffffff;
-            --subtext: #888;
+            --primary: #2563eb; /* Professional Blue */
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
         }
 
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: var(--bg); }
-        ::-webkit-scrollbar-thumb { background: var(--neon); border-radius: 10px; }
-
+        * { box-sizing: border-box; }
         html { scroll-behavior: smooth; }
 
         body {
-            background-color: var(--bg);
-            color: var(--text);
-            font-family: 'Space Grotesk', sans-serif;
+            font-family: 'Inter', sans-serif;
             margin: 0;
-            overflow-x: hidden;
-            cursor: none; /* We maken onze eigen cursor! */
+            background-color: var(--light);
+            color: var(--text-main);
+            line-height: 1.6;
         }
 
-        /* Custom Cursor */
-        #cursor {
-            width: 20px; height: 20px;
-            border: 2px solid var(--neon);
-            border-radius: 50%;
+        /* Navigatie */
+        nav {
             position: fixed;
-            pointer-events: none;
-            z-index: 9999;
-            transition: transform 0.1s ease;
-            box-shadow: 0 0 15px var(--neon);
+            top: 0; width: 100%;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            padding: 1rem 0;
         }
 
-        /* Achtergrond Grid */
-        .grid-overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-image: 
-                linear-gradient(rgba(0, 242, 255, 0.05) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 242, 255, 0.05) 1px, transparent 1px);
-            background-size: 50px 50px;
-            z-index: -1;
-            mask-image: radial-gradient(ellipse at center, black, transparent 80%);
-        }
-
-        header {
-            height: 100vh;
+        .nav-container {
+            max-width: 1100px;
+            margin: 0 auto;
             display: flex;
-            flex-direction: column;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo { font-weight: 700; font-size: 1.2rem; color: var(--dark); text-decoration: none; }
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-muted);
+            margin-left: 25px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover { color: var(--primary); }
+
+        /* Hero Sectie */
+        .hero {
+            padding: 160px 20px 80px;
+            background: white;
             text-align: center;
         }
 
-        .glitch-wrapper {
-            position: relative;
+        .hero h1 { font-size: 3.5rem; margin: 0; color: var(--dark); letter-spacing: -1px; }
+        .hero p { font-size: 1.25rem; color: var(--text-muted); max-width: 600px; margin: 20px auto; }
+        
+        .badge-6icw {
+            background: #dbeafe;
+            color: var(--primary);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
         }
 
-        h1 {
-            font-size: clamp(3rem, 10vw, 6rem);
-            margin: 0;
-            text-transform: uppercase;
-            letter-spacing: 10px;
-            font-weight: 700;
-            background: linear-gradient(to right, var(--neon), var(--neon-pink));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+        /* Secties algemeen */
+        .section { padding: 100px 20px; max-width: 1100px; margin: 0 auto; }
+        .section-title { font-size: 2rem; margin-bottom: 40px; text-align: center; color: var(--dark); }
 
-        .typewriter {
-            font-family: 'Fira Code', monospace;
-            color: var(--neon);
-            font-size: 1.2rem;
-            border-right: 2px solid var(--neon);
-            white-space: nowrap;
-            overflow: hidden;
-            animation: typing 3.5s steps(30, end), blink .75s step-end infinite;
-        }
-
-        @keyframes typing { from { width: 0 } to { width: 100% } }
-        @keyframes blink { from, to { border-color: transparent } 50% { border-color: var(--neon); } }
-
-        .btn-launch {
-            margin-top: 50px;
-            padding: 15px 40px;
-            background: transparent;
-            border: 1px solid var(--neon);
-            color: var(--neon);
-            font-family: 'Fira Code', monospace;
-            text-decoration: none;
-            position: relative;
-            overflow: hidden;
-            transition: 0.4s;
-        }
-
-        .btn-launch:hover {
-            background: var(--neon);
-            color: var(--bg);
-            box-shadow: 0 0 50px var(--neon);
-            transform: translateY(-5px);
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 100px 20px;
-        }
-
-        .section-title {
-            font-size: 2rem;
-            margin-bottom: 50px;
-            border-left: 5px solid var(--neon-pink);
-            padding-left: 20px;
-        }
-
-        .projects-grid {
+        /* Over Mij & Skills */
+        .about-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: start;
+        }
+
+        .skill-item { margin-bottom: 20px; }
+        .skill-info { display: flex; justify-content: space-between; margin-bottom: 8px; font-weight: 600; }
+        .skill-bar { height: 8px; background: #e2e8f0; border-radius: 4px; overflow: hidden; }
+        .skill-progress { height: 100%; background: var(--primary); border-radius: 4px; }
+
+        /* Projecten Grid */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 30px;
         }
 
         .project-card {
-            background: var(--card-bg);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 40px;
-            position: relative;
-            transition: 0.5s;
-            clip-path: polygon(0 0, 100% 0, 100% 85%, 85% 100%, 0 100%);
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 30px;
+            transition: all 0.3s ease;
         }
 
         .project-card:hover {
-            border-color: var(--neon-pink);
-            box-shadow: 0 0 30px rgba(255, 0, 234, 0.2);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
+            border-color: var(--primary);
         }
 
-        .project-card h3 { color: var(--neon); margin-top: 0; }
+        .project-card h3 { margin-top: 0; color: var(--dark); }
+        .project-card p { color: var(--text-muted); font-size: 0.95rem; }
 
-        /* Stats bar */
-        .stats {
-            margin-top: 100px;
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            background: var(--card-bg);
-            padding: 40px;
-            border-radius: 20px;
+        /* Contact */
+        .contact-box {
+            background: var(--dark);
+            color: white;
+            padding: 60px;
+            border-radius: 24px;
+            text-align: center;
         }
 
-        .stat-item { text-align: center; margin: 20px; }
-        .stat-value { font-size: 2.5rem; font-weight: bold; color: var(--neon-pink); display: block; }
-        .stat-label { color: var(--subtext); text-transform: uppercase; font-size: 0.8rem; }
+        .btn-primary {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 20px;
+        }
 
         footer {
+            padding: 40px;
             text-align: center;
-            padding: 50px;
-            font-family: 'Fira Code', monospace;
-            color: #444;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border);
+            margin-top: 50px;
         }
 
+        @media (max-width: 768px) {
+            .about-grid { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 2.5rem; }
+        }
     </style>
 </head>
 <body>
 
-    <div id="cursor"></div>
-    <div class="grid-overlay"></div>
-
-    <header>
-        <div class="glitch-wrapper">
-            <h1>MARCUS</h1>
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo">ML.</a>
+            <div class="nav-links">
+                <a href="#about">Over Mij</a>
+                <a href="#projects">Projecten</a>
+                <a href="#contact">Contact</a>
+            </div>
         </div>
-        <div class="typewriter">ACCESS_GRANTED: STUDENT_6ICW_PRO</div>
-        <a href="#content" class="btn-launch">SYSTEEM INITIALISEREN</a>
+    </nav>
+
+    <header class="hero">
+        <span class="badge-6icw">Student Informatica & Communicatiewetenschappen</span>
+        <h1>Marcus Lambrechts</h1>
+        <p>Gedreven student met een passie voor IT-infrastructuren, web development en netwerkbeheer in de richting 6ICW.</p>
+        <a href="#projects" class="btn-primary">Bekijk mijn werk</a>
     </header>
 
-    <div class="container" id="content">
-        <h2 class="section-title">PROJECT_MODULES</h2>
-        
-        <div class="projects-grid">
-            <div class="project-card">
-                <h3>01 // FRONT-END</h3>
-                <p>Het bouwen van high-performance interfaces met moderne CSS architecturen en GitHub deployment.</p>
+    <section id="about" class="section">
+        <div class="about-grid">
+            <div>
+                <h2 style="text-align: left;" class="section-title">Wie ben ik?</h2>
+                <p>Momenteel volg ik de richting <strong>Informatica- en Communicatiewetenschappen (6ICW)</strong>. Tijdens deze opleiding heb ik een sterke basis gelegd in zowel de theoretische als praktische aspecten van moderne IT-systemen.</p>
+                <p>Mijn focus ligt op het begrijpen van hoe complexe systemen communiceren en het bouwen van efficiënte oplossingen voor de digitale wereld van morgen.</p>
             </div>
-            <div class="project-card">
-                <h3>02 // NETWORK_LAB</h3>
-                <p>Beheren en configureren van complexe netwerken binnen de 6ICW hardware omgevingen.</p>
-            </div>
-            <div class="project-card">
-                <h3>03 // SECURITY</h3>
-                <p>Onderzoek naar digitale veiligheid en data-integriteit in moderne informatiesystemen.</p>
-            </div>
-        </div>
+            <div>
+                <h2 style="text-align: left;" class="section-title">Expertise</h2>
+                
+                <div class="skill-item">
+                    <div class="skill-info"><span>HTML5 & CSS3</span><span>85%</span></div>
+                    <div class="skill-bar"><div class="skill-progress" style="width: 85%;"></div></div>
+                </div>
 
-        <div class="stats">
-            <div class="stat-item">
-                <span class="stat-value">6</span>
-                <span class="stat-label">Jaar ICW</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-value">100%</span>
-                <span class="stat-label">Online</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-value">∞</span>
-                <span class="stat-label">Ambities</span>
+                <div class="skill-item">
+                    <div class="skill-info"><span>Netwerkbeheer (Cisco)</span><span>75%</span></div>
+                    <div class="skill-bar"><div class="skill-progress" style="width: 75%;"></div></div>
+                </div>
+
+                <div class="skill-item">
+                    <div class="skill-info"><span>Hardware & OS</span><span>80%</span></div>
+                    <div class="skill-bar"><div class="skill-progress" style="width: 80%;"></div></div>
+                </div>
+
+                <div class="skill-item">
+                    <div class="skill-info"><span>Version Control (Git)</span><span>70%</span></div>
+                    <div class="skill-bar"><div class="skill-progress" style="width: 70%;"></div></div>
+                </div>
             </div>
         </div>
-    </div>
+    </section>
+
+    <section id="projects" class="section" style="background: #f1f5f9; max-width: 100%;">
+        <div style="max-width: 1100px; margin: 0 auto;">
+            <h2 class="section-title">Projecten</h2>
+            <div class="project-grid">
+                <div class="project-card">
+                    <h3>GitHub Portfolio</h3>
+                    <p>Ontwikkeling van een professionele web-omgeving via GitHub Pages, inclusief implementatie van custom CSS en responsive design.</p>
+                    <small><strong>Tech:</strong> HTML, CSS, Git</small>
+                </div>
+
+                <div class="project-card">
+                    <h3>Netwerk Architectuur</h3>
+                    <p>Onderzoek en simulatie van lokale netwerkstructuren (LAN) met een focus op beveiliging en efficiënte pakketoverdracht.</p>
+                    <small><strong>Tech:</strong> Cisco Packet Tracer, Routing</small>
+                </div>
+
+                <div class="project-card">
+                    <h3>IT-Documentatie</h3>
+                    <p>Het opstellen van technische handleidingen en systeemdocumentatie voor moderne computerhardware.</p>
+                    <small><strong>Tech:</strong> Technical Writing, Hardware</small>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section">
+        <div class="contact-box">
+            <h2>Samenwerken aan een project?</h2>
+            <p>Ik sta altijd open voor nieuwe uitdagingen en leerrijke stages binnen de IT-sector.</p>
+            <p>Bezoek mijn profiel op GitHub om mijn volledige code-base te bekijken.</p>
+            <a href="https://github.com/Marcus-2008" class="btn-primary" target="_blank">Bekijk GitHub Profiel</a>
+        </div>
+    </section>
 
     <footer>
-        -- END OF LINE -- <br>
-        LOCATIE: BELGIË // 2026
+        &copy; 2026 Marcus Lambrechts | 6ICW Portfolio | Mechelen, België
     </footer>
-
-    <script>
-        // Cursor script
-        const cursor = document.getElementById('cursor');
-        document.addEventListener('mousemove', e => {
-            cursor.style.transform = `translate(${e.clientX - 10}px, ${e.clientY - 10}px)`;
-        });
-
-        // Hover effect voor de cursor
-        document.querySelectorAll('a, .project-card').forEach(link => {
-            link.addEventListener('mouseenter', () => {
-                cursor.style.transform += ' scale(2.5)';
-                cursor.style.background = 'rgba(0, 242, 255, 0.1)';
-            });
-            link.addEventListener('mouseleave', () => {
-                cursor.style.background = 'transparent';
-            });
-        });
-    </script>
 
 </body>
 </html>
