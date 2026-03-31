@@ -3,202 +3,245 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Marcus-2008 | 6ICW Terminal</title>
+    <title>MARCUS // 6ICW HUB</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Fira+Code:wght@300;500&display=swap');
+
         :root {
-            --primary: #00ffc3; /* Neon groen/blauw */
-            --bg: #05070a;
-            --card-bg: rgba(22, 27, 34, 0.7);
-            --text: #e6edf3;
-            --accent: #58a6ff;
+            --neon: #00f2ff;
+            --neon-pink: #ff00ea;
+            --bg: #030303;
+            --card-bg: rgba(10, 10, 15, 0.8);
+            --text: #ffffff;
+            --subtext: #888;
         }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg); }
+        ::-webkit-scrollbar-thumb { background: var(--neon); border-radius: 10px; }
 
         html { scroll-behavior: smooth; }
 
         body {
-            font-family: 'Courier New', Courier, monospace; /* Tech vibe */
             background-color: var(--bg);
-            background-image: 
-                radial-gradient(circle at 50% 50%, #112240 0%, #05070a 100%);
             color: var(--text);
+            font-family: 'Space Grotesk', sans-serif;
             margin: 0;
+            overflow-x: hidden;
+            cursor: none; /* We maken onze eigen cursor! */
+        }
+
+        /* Custom Cursor */
+        #cursor {
+            width: 20px; height: 20px;
+            border: 2px solid var(--neon);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.1s ease;
+            box-shadow: 0 0 15px var(--neon);
+        }
+
+        /* Achtergrond Grid */
+        .grid-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 242, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 242, 255, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -1;
+            mask-image: radial-gradient(ellipse at center, black, transparent 80%);
+        }
+
+        header {
+            height: 100vh;
             display: flex;
             flex-direction: column;
+            justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
-
-        /* De pulserende Online knop */
-        .online-status {
-            display: inline-block;
-            padding: 10px 25px;
-            background: transparent;
-            color: var(--primary);
-            border: 2px solid var(--primary);
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            position: relative;
-            transition: 0.3s;
-            box-shadow: 0 0 15px rgba(0, 255, 195, 0.2);
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(0, 255, 195, 0.7); }
-            70% { box-shadow: 0 0 0 15px rgba(0, 255, 195, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(0, 255, 195, 0); }
-        }
-
-        .online-status:hover {
-            background: var(--primary);
-            color: var(--bg);
-            box-shadow: 0 0 30px var(--primary);
-        }
-
-        .header {
             text-align: center;
-            padding: 80px 20px;
-            z-index: 1;
+        }
+
+        .glitch-wrapper {
+            position: relative;
         }
 
         h1 {
-            font-size: 3.5rem;
+            font-size: clamp(3rem, 10vw, 6rem);
             margin: 0;
-            background: linear-gradient(to right, #58a6ff, #00ffc3);
+            text-transform: uppercase;
+            letter-spacing: 10px;
+            font-weight: 700;
+            background: linear-gradient(to right, var(--neon), var(--neon-pink));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 0 10px rgba(88, 166, 255, 0.3));
         }
 
-        .terminal-text {
-            color: #8b949e;
-            font-size: 1.1rem;
-            margin-bottom: 30px;
+        .typewriter {
+            font-family: 'Fira Code', monospace;
+            color: var(--neon);
+            font-size: 1.2rem;
+            border-right: 2px solid var(--neon);
+            white-space: nowrap;
+            overflow: hidden;
+            animation: typing 3.5s steps(30, end), blink .75s step-end infinite;
+        }
+
+        @keyframes typing { from { width: 0 } to { width: 100% } }
+        @keyframes blink { from, to { border-color: transparent } 50% { border-color: var(--neon); } }
+
+        .btn-launch {
+            margin-top: 50px;
+            padding: 15px 40px;
+            background: transparent;
+            border: 1px solid var(--neon);
+            color: var(--neon);
+            font-family: 'Fira Code', monospace;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+            transition: 0.4s;
+        }
+
+        .btn-launch:hover {
+            background: var(--neon);
+            color: var(--bg);
+            box-shadow: 0 0 50px var(--neon);
+            transform: translateY(-5px);
         }
 
         .container {
-            max-width: 1000px;
-            width: 90%;
-            padding-bottom: 100px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 100px 20px;
         }
 
-        .grid {
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 50px;
+            border-left: 5px solid var(--neon-pink);
+            padding-left: 20px;
+        }
+
+        .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
         }
 
-        /* Glassmorphism Card Style */
-        .card {
+        .project-card {
             background: var(--card-bg);
-            backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            padding: 25px;
-            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            padding: 40px;
+            position: relative;
+            transition: 0.5s;
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 85% 100%, 0 100%);
         }
 
-        .card:hover {
-            transform: scale(1.03);
-            border-color: var(--primary);
-            background: rgba(0, 255, 195, 0.05);
+        .project-card:hover {
+            border-color: var(--neon-pink);
+            box-shadow: 0 0 30px rgba(255, 0, 234, 0.2);
         }
 
-        .card h3 {
-            color: var(--primary);
-            margin-top: 0;
+        .project-card h3 { color: var(--neon); margin-top: 0; }
+
+        /* Stats bar */
+        .stats {
+            margin-top: 100px;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 20px;
         }
 
-        .skill-bar {
-            margin-top: 50px;
-            text-align: center;
-        }
-
-        .tag {
-            background: rgba(88, 166, 255, 0.1);
-            color: var(--accent);
-            border: 1px solid var(--accent);
-            padding: 4px 12px;
-            border-radius: 4px;
-            font-size: 0.8rem;
-            margin: 5px;
-            display: inline-block;
-        }
+        .stat-item { text-align: center; margin: 20px; }
+        .stat-value { font-size: 2.5rem; font-weight: bold; color: var(--neon-pink); display: block; }
+        .stat-label { color: var(--subtext); text-transform: uppercase; font-size: 0.8rem; }
 
         footer {
-            padding: 40px;
-            color: #555;
-            font-size: 0.9rem;
+            text-align: center;
+            padding: 50px;
+            font-family: 'Fira Code', monospace;
+            color: #444;
         }
 
-        /* Achtergrond animatie objecten */
-        .bg-shape {
-            position: fixed;
-            top: -10%;
-            left: -10%;
-            width: 40%;
-            height: 40%;
-            background: radial-gradient(circle, rgba(0, 255, 195, 0.05) 0%, transparent 70%);
-            z-index: -1;
-            animation: move 20s infinite alternate;
-        }
-
-        @keyframes move {
-            from { transform: translate(0, 0); }
-            to { transform: translate(50vw, 50vh); }
-        }
     </style>
 </head>
 <body>
 
-    <div class="bg-shape"></div>
+    <div id="cursor"></div>
+    <div class="grid-overlay"></div>
 
-    <header class="header">
-        <div class="terminal-text">>> SYSTEM_READY: MARCUS_V1.0</div>
-        <h1>MARCUS-2008</h1>
-        <p style="letter-spacing: 5px; color: var(--accent);">STUDENT 6ICW</p>
-        <br>
-        <a href="#projects" class="online-status">Initialiseer Portfolio</a>
+    <header>
+        <div class="glitch-wrapper">
+            <h1>MARCUS</h1>
+        </div>
+        <div class="typewriter">ACCESS_GRANTED: STUDENT_6ICW_PRO</div>
+        <a href="#content" class="btn-launch">SYSTEEM INITIALISEREN</a>
     </header>
 
-    <main class="container" id="projects">
-        <div class="grid">
-            <div class="card">
-                <h3>01. Web Ops</h3>
-                <p>Implementatie van GitHub Pages met geavanceerde CSS architecturen.</p>
-                <div class="tag">HTML5</div> <div class="tag">CSS3</div>
+    <div class="container" id="content">
+        <h2 class="section-title">PROJECT_MODULES</h2>
+        
+        <div class="projects-grid">
+            <div class="project-card">
+                <h3>01 // FRONT-END</h3>
+                <p>Het bouwen van high-performance interfaces met moderne CSS architecturen en GitHub deployment.</p>
             </div>
-
-            <div class="card">
-                <h3>02. ICW Core</h3>
-                <p>Focus op netwerkbeheer, hardware en informatiesystemen binnen 6ICW.</p>
-                <div class="tag">Networks</div> <div class="tag">Hardware</div>
+            <div class="project-card">
+                <h3>02 // NETWORK_LAB</h3>
+                <p>Beheren en configureren van complexe netwerken binnen de 6ICW hardware omgevingen.</p>
             </div>
-
-            <div class="card">
-                <h3>03. Future Tech</h3>
-                <p>Ontwikkelen van scripts en automatisering voor moderne omgevingen.</p>
-                <div class="tag">JavaScript</div> <div class="tag">Git</div>
+            <div class="project-card">
+                <h3>03 // SECURITY</h3>
+                <p>Onderzoek naar digitale veiligheid en data-integriteit in moderne informatiesystemen.</p>
             </div>
         </div>
 
-        <div class="skill-bar">
-            <h3>TECH_STACK</h3>
-            <span class="tag">Packet Tracer</span>
-            <span class="tag">Sublime Text</span>
-            <span class="tag">Markdown</span>
-            <span class="tag">VS Code</span>
-            <span class="tag">Linux Bash</span>
+        <div class="stats">
+            <div class="stat-item">
+                <span class="stat-value">6</span>
+                <span class="stat-label">Jaar ICW</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-value">100%</span>
+                <span class="stat-label">Online</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-value">∞</span>
+                <span class="stat-label">Ambities</span>
+            </div>
         </div>
-    </main>
+    </div>
 
     <footer>
-        [LOG_END] &copy; 2024 - Marcus-2008 // Verified by 6ICW-Terminal
+        -- END OF LINE -- <br>
+        LOCATIE: BELGIË // 2026
     </footer>
+
+    <script>
+        // Cursor script
+        const cursor = document.getElementById('cursor');
+        document.addEventListener('mousemove', e => {
+            cursor.style.transform = `translate(${e.clientX - 10}px, ${e.clientY - 10}px)`;
+        });
+
+        // Hover effect voor de cursor
+        document.querySelectorAll('a, .project-card').forEach(link => {
+            link.addEventListener('mouseenter', () => {
+                cursor.style.transform += ' scale(2.5)';
+                cursor.style.background = 'rgba(0, 242, 255, 0.1)';
+            });
+            link.addEventListener('mouseleave', () => {
+                cursor.style.background = 'transparent';
+            });
+        });
+    </script>
 
 </body>
 </html>
