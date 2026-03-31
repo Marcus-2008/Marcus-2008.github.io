@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #2563eb; /* Professional Blue */
+            --primary: #2563eb; 
             --dark: #0f172a;
             --light: #f8fafc;
             --text-main: #1e293b;
@@ -26,7 +26,6 @@
             line-height: 1.6;
         }
 
-        /* Navigatie */
         nav {
             position: fixed;
             top: 0; width: 100%;
@@ -56,7 +55,6 @@
         }
         .nav-links a:hover { color: var(--primary); }
 
-        /* Hero Sectie */
         .hero {
             padding: 160px 20px 80px;
             background: white;
@@ -75,11 +73,9 @@
             font-size: 0.9rem;
         }
 
-        /* Secties algemeen */
         .section { padding: 100px 20px; max-width: 1100px; margin: 0 auto; }
         .section-title { font-size: 2rem; margin-bottom: 40px; text-align: center; color: var(--dark); }
 
-        /* Over Mij & Skills */
         .about-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -92,7 +88,6 @@
         .skill-bar { height: 8px; background: #e2e8f0; border-radius: 4px; overflow: hidden; }
         .skill-progress { height: 100%; background: var(--primary); border-radius: 4px; }
 
-        /* Projecten Grid */
         .project-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -105,6 +100,9 @@
             border-radius: 12px;
             padding: 30px;
             transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
         .project-card:hover {
@@ -116,7 +114,6 @@
         .project-card h3 { margin-top: 0; color: var(--dark); }
         .project-card p { color: var(--text-muted); font-size: 0.95rem; }
 
-        /* Contact */
         .contact-box {
             background: var(--dark);
             color: white;
@@ -156,7 +153,7 @@
         <div class="nav-container">
             <a href="#" class="logo">ML.</a>
             <div class="nav-links">
-                <a href="#about">Over Mij</a>
+                <a href="#about">Expertise</a>
                 <a href="#projects">Projecten</a>
                 <a href="#contact">Contact</a>
             </div>
@@ -166,37 +163,42 @@
     <header class="hero">
         <span class="badge-6icw">Student Informatica & Communicatiewetenschappen</span>
         <h1>Marcus Lambrechts</h1>
-        <p>Gedreven student met een passie voor IT-infrastructuren, web development en netwerkbeheer in de richting 6ICW.</p>
-        <a href="#projects" class="btn-primary">Bekijk mijn werk</a>
+        <p>Gedreven door techniek. Focus op softwareontwikkeling, netwerkanalyse en systeembeheer binnen de richting 6ICW.</p>
+        <a href="#projects" class="btn-primary">Portfolio bekijken</a>
     </header>
 
     <section id="about" class="section">
         <div class="about-grid">
             <div>
                 <h2 style="text-align: left;" class="section-title">Wie ben ik?</h2>
-                <p>Momenteel volg ik de richting <strong>Informatica- en Communicatiewetenschappen (6ICW)</strong>. Tijdens deze opleiding heb ik een sterke basis gelegd in zowel de theoretische als praktische aspecten van moderne IT-systemen.</p>
-                <p>Mijn focus ligt op het begrijpen van hoe complexe systemen communiceren en het bouwen van efficiënte oplossingen voor de digitale wereld van morgen.</p>
+                <p>Als student in de richting <strong>6 Informatica- en Communicatiewetenschappen</strong> focus ik me op de brug tussen code en hardware. Ik ben constant bezig met het uitbreiden van mijn kennis in zowel softwareontwikkeling als netwerkinfrastructuren.</p>
+                <p>Mijn doel is om technische uitdagingen op te lossen met efficiënte en gedocumenteerde code, waarbij ik gebruik maak van moderne tools en methodologieën.</p>
             </div>
             <div>
-                <h2 style="text-align: left;" class="section-title">Expertise</h2>
+                <h2 style="text-align: left;" class="section-title">Technische Expertise</h2>
                 
                 <div class="skill-item">
-                    <div class="skill-info"><span>HTML5 & CSS3</span><span>85%</span></div>
-                    <div class="skill-bar"><div class="skill-progress" style="width: 85%;"></div></div>
+                    <div class="skill-info"><span>Python & Programmeren</span><span>90%</span></div>
+                    <div class="skill-bar"><div class="skill-progress" style="width: 90%;"></div></div>
                 </div>
 
                 <div class="skill-item">
-                    <div class="skill-info"><span>Netwerkbeheer (Cisco)</span><span>75%</span></div>
-                    <div class="skill-bar"><div class="skill-progress" style="width: 75%;"></div></div>
-                </div>
-
-                <div class="skill-item">
-                    <div class="skill-info"><span>Hardware & OS</span><span>80%</span></div>
+                    <div class="skill-info"><span>Cisco & Netwerkbeheer</span><span>80%</span></div>
                     <div class="skill-bar"><div class="skill-progress" style="width: 80%;"></div></div>
                 </div>
 
                 <div class="skill-item">
-                    <div class="skill-info"><span>Version Control (Git)</span><span>70%</span></div>
+                    <div class="skill-info"><span>CSS3 & HTML5</span><span>85%</span></div>
+                    <div class="skill-bar"><div class="skill-progress" style="width: 85%;"></div></div>
+                </div>
+
+                <div class="skill-item">
+                    <div class="skill-info"><span>Databanken (SQL)</span><span>75%</span></div>
+                    <div class="skill-bar"><div class="skill-progress" style="width: 75%;"></div></div>
+                </div>
+
+                <div class="skill-item">
+                    <div class="skill-info"><span>Systeembeheer & Security</span><span>70%</span></div>
                     <div class="skill-bar"><div class="skill-progress" style="width: 70%;"></div></div>
                 </div>
             </div>
@@ -208,21 +210,27 @@
             <h2 class="section-title">Projecten</h2>
             <div class="project-grid">
                 <div class="project-card">
-                    <h3>GitHub Portfolio</h3>
-                    <p>Ontwikkeling van een professionele web-omgeving via GitHub Pages, inclusief implementatie van custom CSS en responsive design.</p>
-                    <small><strong>Tech:</strong> HTML, CSS, Git</small>
+                    <div>
+                        <h3>F24 Motorsturing</h3>
+                        <p>Een technisch project gericht op de aansturing en monitoring van een F24 motor-unit. Dit omvat de implementatie van logica voor een betrouwbare werking en seriële communicatie voor status-updates.</p>
+                    </div>
+                    <small><strong>Tech:</strong> Microcontrollers, Logic Design, Hardware Interface</small>
                 </div>
 
                 <div class="project-card">
-                    <h3>Netwerk Architectuur</h3>
-                    <p>Onderzoek en simulatie van lokale netwerkstructuren (LAN) met een focus op beveiliging en efficiënte pakketoverdracht.</p>
-                    <small><strong>Tech:</strong> Cisco Packet Tracer, Routing</small>
+                    <div>
+                        <h3>GitHub Portfolio</h3>
+                        <p>Ontwikkeling van deze web-omgeving. Gehost via GitHub Pages met een focus op moderne UI/UX principes en responsive design voor alle apparaten.</p>
+                    </div>
+                    <small><strong>Tech:</strong> HTML, CSS, Version Control</small>
                 </div>
 
                 <div class="project-card">
-                    <h3>IT-Documentatie</h3>
-                    <p>Het opstellen van technische handleidingen en systeemdocumentatie voor moderne computerhardware.</p>
-                    <small><strong>Tech:</strong> Technical Writing, Hardware</small>
+                    <div>
+                        <h3>Cisco Netwerkanalyse</h3>
+                        <p>Simulatie en configuratie van een bedrijfsnetwerk inclusief VLAN's, routing-protocollen en beveiligingsinstellingen binnen de ICW-omgeving.</p>
+                    </div>
+                    <small><strong>Tech:</strong> Packet Tracer, CCNA Fundamentals</small>
                 </div>
             </div>
         </div>
@@ -230,15 +238,14 @@
 
     <section id="contact" class="section">
         <div class="contact-box">
-            <h2>Samenwerken aan een project?</h2>
-            <p>Ik sta altijd open voor nieuwe uitdagingen en leerrijke stages binnen de IT-sector.</p>
-            <p>Bezoek mijn profiel op GitHub om mijn volledige code-base te bekijken.</p>
-            <a href="https://github.com/Marcus-2008" class="btn-primary" target="_blank">Bekijk GitHub Profiel</a>
+            <h2>Laten we connecteren</h2>
+            <p>Interesse in mijn technische vaardigheden of projecten? Bekijk mijn volledige repositories en bijdragen op GitHub.</p>
+            <a href="https://github.com/Marcus-2008" class="btn-primary" target="_blank">Marcus-2008 op GitHub</a>
         </div>
     </section>
 
     <footer>
-        &copy; 2026 Marcus Lambrechts | 6ICW Portfolio | Mechelen, België
+        &copy; 2026 Marcus Lambrechts | 6ICW Portfolio | Gedreven door Informatica
     </footer>
 
 </body>
