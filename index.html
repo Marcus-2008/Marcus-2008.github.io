@@ -3,80 +3,202 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Marcus-2008 | 6ICW</title>
+    <title>Marcus-2008 | 6ICW Terminal</title>
     <style>
-        /* Basis stijl */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #0d1117; /* GitHub dark mode kleur */
-            color: #c9d1d9;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            text-align: center;
+        :root {
+            --primary: #00ffc3; /* Neon groen/blauw */
+            --bg: #05070a;
+            --card-bg: rgba(22, 27, 34, 0.7);
+            --text: #e6edf3;
+            --accent: #58a6ff;
         }
 
-        /* Container voor de content */
-        .container {
-            background-color: #161b22;
-            padding: 3rem;
-            border-radius: 12px;
-            border: 1px solid #30363d;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            max-width: 400px;
-            width: 90%;
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Courier New', Courier, monospace; /* Tech vibe */
+            background-color: var(--bg);
+            background-image: 
+                radial-gradient(circle at 50% 50%, #112240 0%, #05070a 100%);
+            color: var(--text);
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* De pulserende Online knop */
+        .online-status {
+            display: inline-block;
+            padding: 10px 25px;
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            transition: 0.3s;
+            box-shadow: 0 0 15px rgba(0, 255, 195, 0.2);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(0, 255, 195, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(0, 255, 195, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 255, 195, 0); }
+        }
+
+        .online-status:hover {
+            background: var(--primary);
+            color: var(--bg);
+            box-shadow: 0 0 30px var(--primary);
+        }
+
+        .header {
+            text-align: center;
+            padding: 80px 20px;
+            z-index: 1;
         }
 
         h1 {
-            color: #58a6ff;
-            margin-bottom: 0.5rem;
-            font-size: 2.5rem;
+            font-size: 3.5rem;
+            margin: 0;
+            background: linear-gradient(to right, #58a6ff, #00ffc3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 10px rgba(88, 166, 255, 0.3));
         }
 
-        h2 {
+        .terminal-text {
             color: #8b949e;
-            font-weight: 400;
-            margin-top: 0;
-            border-bottom: 1px solid #30363d;
-            padding-bottom: 1rem;
+            font-size: 1.1rem;
+            margin-bottom: 30px;
         }
 
-        p {
-            line-height: 1.6;
-            color: #8b949e;
-        }
-
-        .badge {
-            display: inline-block;
-            background-color: #238636;
-            color: white;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-weight: bold;
-            margin-top: 10px;
-        }
-
-        /* Een simpele animatie */
         .container {
-            animation: fadeIn 1s ease-in;
+            max-width: 1000px;
+            width: 90%;
+            padding-bottom: 100px;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        /* Glassmorphism Card Style */
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 25px;
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .card:hover {
+            transform: scale(1.03);
+            border-color: var(--primary);
+            background: rgba(0, 255, 195, 0.05);
+        }
+
+        .card h3 {
+            color: var(--primary);
+            margin-top: 0;
+        }
+
+        .skill-bar {
+            margin-top: 50px;
+            text-align: center;
+        }
+
+        .tag {
+            background: rgba(88, 166, 255, 0.1);
+            color: var(--accent);
+            border: 1px solid var(--accent);
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            margin: 5px;
+            display: inline-block;
+        }
+
+        footer {
+            padding: 40px;
+            color: #555;
+            font-size: 0.9rem;
+        }
+
+        /* Achtergrond animatie objecten */
+        .bg-shape {
+            position: fixed;
+            top: -10%;
+            left: -10%;
+            width: 40%;
+            height: 40%;
+            background: radial-gradient(circle, rgba(0, 255, 195, 0.05) 0%, transparent 70%);
+            z-index: -1;
+            animation: move 20s infinite alternate;
+        }
+
+        @keyframes move {
+            from { transform: translate(0, 0); }
+            to { transform: translate(50vw, 50vh); }
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <h1>Marcus-2008</h1>
-        <h2>Klas: 6ICW</h2>
-        <p>Welkom op mijn officiële GitHub-site. Dit is het begin van mijn online portfolio.</p>
-        <div class="badge">Online</div>
-    </div>
+    <div class="bg-shape"></div>
+
+    <header class="header">
+        <div class="terminal-text">>> SYSTEM_READY: MARCUS_V1.0</div>
+        <h1>MARCUS-2008</h1>
+        <p style="letter-spacing: 5px; color: var(--accent);">STUDENT 6ICW</p>
+        <br>
+        <a href="#projects" class="online-status">Initialiseer Portfolio</a>
+    </header>
+
+    <main class="container" id="projects">
+        <div class="grid">
+            <div class="card">
+                <h3>01. Web Ops</h3>
+                <p>Implementatie van GitHub Pages met geavanceerde CSS architecturen.</p>
+                <div class="tag">HTML5</div> <div class="tag">CSS3</div>
+            </div>
+
+            <div class="card">
+                <h3>02. ICW Core</h3>
+                <p>Focus op netwerkbeheer, hardware en informatiesystemen binnen 6ICW.</p>
+                <div class="tag">Networks</div> <div class="tag">Hardware</div>
+            </div>
+
+            <div class="card">
+                <h3>03. Future Tech</h3>
+                <p>Ontwikkelen van scripts en automatisering voor moderne omgevingen.</p>
+                <div class="tag">JavaScript</div> <div class="tag">Git</div>
+            </div>
+        </div>
+
+        <div class="skill-bar">
+            <h3>TECH_STACK</h3>
+            <span class="tag">Packet Tracer</span>
+            <span class="tag">Sublime Text</span>
+            <span class="tag">Markdown</span>
+            <span class="tag">VS Code</span>
+            <span class="tag">Linux Bash</span>
+        </div>
+    </main>
+
+    <footer>
+        [LOG_END] &copy; 2024 - Marcus-2008 // Verified by 6ICW-Terminal
+    </footer>
 
 </body>
 </html>
