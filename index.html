@@ -5,125 +5,195 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Marcus Lambrechts | Portfolio 6ICW</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         :root {
-            --bg: #fdfdfd;
-            --accent: #1a1a1a;
-            --secondary: #6b7280;
-            --border: #ececec;
-            --card-hover: #ffffff;
-            --blue-accent: #3b82f6;
+            --primary: #2563eb; 
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            /* De "naar voren komende" schaduw layers */
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }
 
-        * { box-sizing: border-box; transition: all 0.2s ease-in-out; }
+        * { box-sizing: border-box; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
         html { scroll-behavior: smooth; }
 
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
             margin: 0;
-            background: linear-gradient(135deg, #fdfdfd 0%, #f4f7ff 100%);
-            color: var(--accent);
-            line-height: 1.7;
+            background-color: #fbfcfe;
+            color: var(--text-main);
+            line-height: 1.6;
         }
 
-        /* Navbar met Blur */
         nav {
             position: fixed;
             top: 0; width: 100%;
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(15px);
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--border);
             z-index: 1000;
-            padding: 1.2rem 0;
+            padding: 1rem 0;
         }
 
         .nav-container {
-            max-width: 1000px;
+            max-width: 1100px;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 25px;
+            padding: 0 20px;
         }
 
-        .logo { font-weight: 800; font-size: 1.1rem; letter-spacing: -0.5px; text-decoration: none; color: var(--accent); }
-        .nav-links a { text-decoration: none; color: var(--secondary); margin-left: 30px; font-size: 0.9rem; font-weight: 500; }
-        .nav-links a:hover { color: var(--blue-accent); }
-
-        /* Hero Sectie */
-        header.hero {
-            padding: 180px 25px 100px;
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .hero h1 { font-size: 4rem; margin: 0; font-weight: 800; letter-spacing: -2px; line-height: 1.1; }
-        .hero p { font-size: 1.1rem; color: var(--secondary); margin: 25px 0; }
-        .badge { background: #eff6ff; color: var(--blue-accent); padding: 6px 16px; border-radius: 100px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
-
-        /* Sections */
-        .container { max-width: 1000px; margin: 0 auto; padding: 100px 25px; }
-        h2.section-label { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; color: var(--blue-accent); margin-bottom: 15px; }
+        .logo { font-weight: 800; font-size: 1.2rem; color: var(--dark); text-decoration: none; letter-spacing: -1px; }
         
-        /* Skills Grid */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin-top: 50px;
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-muted);
+            margin-left: 25px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        .nav-links a:hover { color: var(--primary); }
+
+        .hero {
+            padding: 180px 20px 100px;
+            background: radial-gradient(circle at top right, #f0f7ff, #fbfcfe);
+            text-align: center;
         }
 
-        .skill-group h3 { font-size: 1.1rem; margin-bottom: 20px; }
-        .skill-item { margin-bottom: 15px; }
-        .skill-label { display: flex; justify-content: space-between; font-size: 0.9rem; margin-bottom: 5px; font-weight: 600; }
-        .bar-bg { background: #eef2f6; height: 6px; border-radius: 10px; overflow: hidden; }
-        .bar-fill { height: 100%; background: var(--accent); border-radius: 10px; }
+        .hero h1 { font-size: 4rem; margin: 0; color: var(--dark); letter-spacing: -2px; font-weight: 800; }
+        .hero p { font-size: 1.2rem; color: var(--text-muted); max-width: 600px; margin: 25px auto; }
+        
+        .badge-6icw {
+            background: #eff6ff;
+            color: var(--primary);
+            padding: 6px 16px;
+            border-radius: 100px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 1px solid #dbeafe;
+        }
 
-        /* Project Cards - Clean & Depth */
+        .section { padding: 100px 20px; max-width: 1100px; margin: 0 auto; }
+        .section-title { font-size: 2.2rem; font-weight: 800; margin-bottom: 50px; text-align: center; color: var(--dark); letter-spacing: -1px; }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .skill-card {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .skill-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
+
+        .skill-item { margin-bottom: 25px; }
+        .skill-info { display: flex; justify-content: space-between; margin-bottom: 10px; font-weight: 700; font-size: 0.95rem; }
+        .skill-bar { height: 8px; background: #f1f5f9; border-radius: 10px; overflow: hidden; }
+        .skill-progress { height: 100%; background: var(--primary); border-radius: 10px; }
+
         .project-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
         }
 
-        .card {
-            background: rgba(255, 255, 255, 0.5);
+        .project-card {
+            background: white;
             border: 1px solid var(--border);
-            padding: 35px;
-            border-radius: 20px;
-            text-decoration: none;
-            color: inherit;
-            display: block;
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
         }
 
-        .card:hover {
-            background: #fff;
-            border-color: #d1d5db;
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.04);
+        /* Het "naar voren komen" effect */
+        .project-card:hover {
+            transform: translateY(-12px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary);
         }
 
-        .card h3 { margin-top: 0; font-size: 1.3rem; }
-        .card p { color: var(--secondary); font-size: 0.95rem; margin-bottom: 25px; }
-        .card-footer { font-size: 0.75rem; font-weight: 700; color: var(--blue-accent); text-transform: uppercase; }
+        .icon-box {
+            width: 50px;
+            height: 50px;
+            background: #f8fafc;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
 
-        /* Contact Box */
-        .cta-box {
-            background: var(--accent);
-            color: #fff;
+        .project-card h3 { margin: 10px 0; font-weight: 800; color: var(--dark); font-size: 1.4rem; }
+        .project-card p { color: var(--text-muted); font-size: 1rem; margin-bottom: 30px; }
+
+        .tech-tag {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            background: #eff6ff;
+            padding: 4px 12px;
+            border-radius: 6px;
+        }
+
+        .contact-box {
+            background: var(--dark);
+            color: white;
             padding: 80px 40px;
-            border-radius: 30px;
+            border-radius: 32px;
             text-align: center;
-            margin-top: 50px;
+            box-shadow: var(--shadow-lg);
         }
 
-        .cta-box h2 { font-size: 2.5rem; margin-bottom: 20px; letter-spacing: -1px; }
-        .btn-white { display: inline-block; background: #fff; color: #000; padding: 15px 35px; border-radius: 12px; text-decoration: none; font-weight: 700; margin-top: 20px; }
+        .btn-primary {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 16px 35px;
+            border-radius: 14px;
+            text-decoration: none;
+            font-weight: 700;
+            margin-top: 25px;
+            box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.3);
+        }
 
-        footer { text-align: center; padding: 60px 0; color: #9ca3af; font-size: 0.85rem; border-top: 1px solid var(--border); margin-top: 100px; }
+        .btn-primary:hover { transform: scale(1.05); box-shadow: 0 20px 25px -5px rgba(37, 99, 235, 0.4); }
+
+        footer {
+            padding: 60px 20px;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
 
         @media (max-width: 768px) {
+            .about-grid { grid-template-columns: 1fr; }
             .hero h1 { font-size: 2.8rem; }
         }
     </style>
@@ -134,7 +204,7 @@
         <div class="nav-container">
             <a href="#" class="logo">MARCUS.L</a>
             <div class="nav-links">
-                <a href="#expertise">Expertise</a>
+                <a href="#about">Expertise</a>
                 <a href="#projects">Projecten</a>
                 <a href="#contact">Contact</a>
             </div>
@@ -142,75 +212,85 @@
     </nav>
 
     <header class="hero">
-        <span class="badge">Informatica & Communicatiewetenschappen</span>
-        <h1>Design. Code. Connect.</h1>
-        <p>Ik ben Marcus Lambrechts, een tech-gedreven student gefocust op de architectuur van software en netwerken. In 6ICW combineer ik diepgaande logica met praktische implementaties.</p>
+        <span class="badge-6icw">Informatica & Communicatiewetenschappen</span>
+        <h1>Marcus Lambrechts</h1>
+        <p>Analytisch ingesteld, technisch gedreven. Gespecialiseerd in Python development en netwerkarchitectuur.</p>
+        <a href="#projects" class="btn-primary">Projecten bekijken</a>
     </header>
 
-    <div id="expertise" class="container">
-        <h2 class="section-label">Kerncompetenties</h2>
-        <div class="skills-grid">
-            <div class="skill-group">
-                <h3>Development</h3>
-                <div class="skill-item">
-                    <div class="skill-label"><span>Python / Programming</span><span>90%</span></div>
-                    <div class="bar-bg"><div class="bar-fill" style="width: 90%;"></div></div>
-                </div>
-                <div class="skill-item">
-                    <div class="skill-label"><span>CSS3 & HTML5</span><span>85%</span></div>
-                    <div class="bar-bg"><div class="bar-fill" style="width: 85%;"></div></div>
-                </div>
+    <section id="about" class="section">
+        <h2 class="section-title">Technische Expertise</h2>
+        <div class="about-grid">
+            <div>
+                <p>Als student in de richting <strong>6ICW</strong> combineer ik programmeerlogica met systeemkennis. Mijn aanpak is gebaseerd op nauwkeurigheid en het continu optimaliseren van processen.</p>
+                <p>Ik focus me op schaalbare oplossingen, of het nu gaat om een Python script voor motorsturing of het configureren van een secure bedrijfsnetwerk.</p>
             </div>
-            <div class="skill-group">
-                <h3>Infrastructuur</h3>
+            <div class="skill-card">
                 <div class="skill-item">
-                    <div class="skill-label"><span>Cisco Networking</span><span>80%</span></div>
-                    <div class="bar-bg"><div class="bar-fill" style="width: 80%;"></div></div>
+                    <div class="skill-info"><span>Python & Development</span><span>90%</span></div>
+                    <div class="skill-bar"><div class="skill-progress" style="width: 90%;"></div></div>
                 </div>
                 <div class="skill-item">
-                    <div class="skill-label"><span>Systeembeheer</span><span>75%</span></div>
-                    <div class="bar-bg"><div class="bar-fill" style="width: 75%;"></div></div>
+                    <div class="skill-info"><span>Cisco Networking</span><span>80%</span></div>
+                    <div class="skill-bar"><div class="skill-progress" style="width: 80%;"></div></div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-info"><span>Frontend (CSS/HTML)</span><span>85%</span></div>
+                    <div class="skill-bar"><div class="skill-progress" style="width: 85%;"></div></div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-info"><span>Database Management</span><span>75%</span></div>
+                    <div class="skill-bar"><div class="skill-progress" style="width: 75%;"></div></div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <div id="projects" style="background: rgba(240, 244, 248, 0.4);">
-        <div class="container">
-            <h2 class="section-label">Geselecteerd Werk</h2>
+    <section id="projects" class="section" style="background: #f8fafc; max-width: 100%;">
+        <div style="max-width: 1100px; margin: 0 auto; padding: 0 20px;">
+            <h2 class="section-title">Geselecteerd Werk</h2>
             <div class="project-grid">
-                <div class="card">
+                
+                <div class="project-card">
+                    <div class="icon-box"><i data-lucide="cpu"></i></div>
                     <h3>F24 Motorsturing</h3>
-                    <p>Ontwerp en realisatie van een motor-unit controller. Focus op seriële datastromen, monitoring en failsafe logica voor industriële simulaties.</p>
-                    <div class="card-footer">Python / Embedded Logic</div>
+                    <p>Ontwikkeling van een controlesysteem voor F24 motor-units. Implementatie van seriële monitoring en failsafe logica voor industriële simulaties.</p>
+                    <div><span class="tech-tag">Python</span> <span class="tech-tag">Embedded</span></div>
                 </div>
 
-                <div class="card">
+                <div class="project-card">
+                    <div class="icon-box"><i data-lucide="layout"></i></div>
                     <h3>Portfolio Hub</h3>
-                    <p>Mijn centrale punt op GitHub. Een minimalistische omgeving geoptimaliseerd voor snelheid, SEO en responsive gebruik op elk device.</p>
-                    <div class="card-footer">HTML5 / CSS / Git</div>
+                    <p>Mijn centrale punt op GitHub. Een high-performance omgeving geoptimaliseerd voor UX, met een focus op clean design en versiebeheer.</p>
+                    <div><span class="tech-tag">Web</span> <span class="tech-tag">Git</span></div>
                 </div>
 
-                <div class="card">
+                <div class="project-card">
+                    <div class="icon-box"><i data-lucide="network"></i></div>
                     <h3>Enterprise Lab</h3>
-                    <p>Simulatie van complexe bedrijfsnetwerken met VLAN-segmentatie en routing protocollen binnen een gecontroleerde ICW omgeving.</p>
-                    <div class="card-footer">Networking / Cisco</div>
+                    <p>Configuratie van complexe netwerkinfrastructuren. VLAN-segmentatie, routing protocollen en security auditing binnen Cisco omgevingen.</p>
+                    <div><span class="tech-tag">Cisco</span> <span class="tech-tag">Security</span></div>
                 </div>
+
             </div>
         </div>
-    </div>
+    </section>
 
-    <div id="contact" class="container">
-        <div class="cta-box">
-            <h2>Klaar voor de volgende stap?</h2>
-            <p>Momenteel beschikbaar voor uitdagende projecten en professionele groei binnen de IT-sector.</p>
-            <a href="https://github.com/Marcus-2008" class="btn-white">Mijn GitHub Repository</a>
+    <section id="contact" class="section">
+        <div class="contact-box">
+            <h2 style="color: white; margin-bottom: 20px;">Samenwerken aan een project?</h2>
+            <p style="color: #94a3b8; margin-bottom: 30px;">Ik ben altijd op zoek naar nieuwe technische uitdagingen en professionele groei in de IT-sector.</p>
+            <a href="https://github.com/Marcus-2008" class="btn-primary" target="_blank">Bekijk mijn GitHub</a>
         </div>
-    </div>
+    </section>
 
     <footer>
-        &copy; 2026 Marcus Lambrechts &bull; 6 Informatica- en Communicatiewetenschappen &bull; Mechelen
+        &copy; 2026 Marcus Lambrechts &bull; 6ICW &bull; Mechelen, België
     </footer>
 
+    <script>
+        // Activeert de icoontjes
+        lucide.createIcons();
+    </script>
 </body>
 </html>
