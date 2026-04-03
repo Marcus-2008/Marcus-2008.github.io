@@ -8,35 +8,94 @@
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         :root {
-            --bg: #f8fafc;
-            --accent: #0f172a;
-            --blue-accent: #2563eb;
+            /* === LICHT THEMA (Standaard) === */
+            --primary: #2563eb; 
+            --dark: #0f172a;
+            --light: #f8fafc;
+            
+            /* Achtergronden */
+            --bg-body: #fbfcfe;
+            --bg-nav: rgba(255, 255, 255, 0.8);
+            --bg-card: #ffffff;
+            --bg-section-muted: #f8fafc;
+            --bg-icon-box: #f8fafc;
+            --bg-badge: #eff6ff;
+            --bg-btn-primary: var(--primary);
+            --bg-contact-box: var(--dark);
+            
+            /* Tekst & Randen */
+            --text-main: #1e293b;
+            --text-muted: #64748b;
             --border: #e2e8f0;
-            --shadow-base: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-            --shadow-lift: 0 25px 35px -5px rgba(0, 0, 0, 0.1), 0 10px 15px -5px rgba(0, 0, 0, 0.04);
+            --border-hover: #d1d5db;
+            --logo-color: var(--dark);
+            --btn-text: #ffffff;
+            --contact-text: #94a3b8;
+            
+            /* Schaduwen */
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            --btn-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.3);
+            --btn-shadow-hover: 0 20px 25px -5px rgba(37, 99, 235, 0.4);
+            
+            /* Overig */
+            --skill-bar-bg: #f1f5f9;
         }
 
-        * { box-sizing: border-box; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        /* === DONKER THEMA === */
+        body.dark-mode {
+            /* Achtergronden */
+            --bg-body: #0a0f1e;
+            --bg-nav: rgba(10, 15, 30, 0.8);
+            --bg-card: #141b2d;
+            --bg-section-muted: #0d1222;
+            --bg-icon-box: #1e293b;
+            --bg-badge: #1e293b;
+            --bg-contact-box: #141b2d;
+            
+            /* Tekst & Randen */
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --border: #2d3748;
+            --border-hover: #4a5568;
+            --logo-color: #ffffff;
+            
+            /* Schaduwen */
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+            --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.6), 0 10px 10px -5px rgba(0, 0, 0, 0.4);
+            
+            /* Overig */
+            --skill-bar-bg: #2d3748;
+        }
+
+        /* --- Algemene Stijlen --- */
+        * { box-sizing: border-box; transition: background 0.3s, color 0.3s, border-color 0.3s, box-shadow 0.3s, transform 0.3s; }
         html { scroll-behavior: smooth; }
 
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
             margin: 0;
-            background-color: var(--bg);
-            color: var(--accent);
+            background-color: var(--bg-body);
+            color: var(--text-main);
             line-height: 1.6;
-            overflow-x: hidden;
+            padding-top: 80px; /* Ruimte voor de vaste nav */
         }
 
-        /* --- NAVIGATIE --- */
+        /* --- Navigatie --- */
         nav {
             position: fixed;
             top: 0; width: 100%;
-            background: rgba(255, 255, 255, 0.8);
+            background: var(--bg-nav);
             backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--border);
             z-index: 1000;
-            padding: 1.2rem 0;
+            padding: 1rem 0;
+            height: 80px;
+            display: flex;
+            align-items: center;
         }
 
         .nav-container {
@@ -45,130 +104,200 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 25px;
+            padding: 0 20px;
+            width: 100%;
         }
 
-        .logo { font-weight: 800; font-size: 1.2rem; text-decoration: none; color: var(--accent); letter-spacing: -1px; }
-        .nav-links a { text-decoration: none; color: #64748b; margin-left: 30px; font-weight: 600; font-size: 0.9rem; }
-        .nav-links a:hover { color: var(--blue-accent); }
+        .logo { font-weight: 800; font-size: 1.2rem; color: var(--logo-color); text-decoration: none; letter-spacing: -1px; }
+        
+        .nav-right { display: flex; align-items: center; gap: 20px; }
 
-        /* --- HERO --- */
-        header.hero {
-            padding: 220px 25px 140px;
-            text-align: center;
-            background: radial-gradient(circle at 50% 0%, #e0f2fe 0%, #f8fafc 70%);
+        .nav-links { display: flex; align-items: center; }
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-muted);
+            margin-left: 25px;
+            font-weight: 600;
+            font-size: 0.9rem;
         }
+        .nav-links a:hover { color: var(--primary); }
 
-        .hero h1 { font-size: clamp(2.5rem, 8vw, 4.5rem); margin: 0; font-weight: 800; letter-spacing: -3px; line-height: 1; }
-        .hero p { font-size: 1.2rem; color: #475569; max-width: 600px; margin: 25px auto; }
-
-        /* --- CONTAINER & TITELS --- */
-        .container { max-width: 1100px; margin: 0 auto; padding: 80px 25px; }
-        .section-title { font-size: 2.2rem; font-weight: 800; margin-bottom: 50px; letter-spacing: -1px; }
-
-        /* --- SKILL BARS --- */
-        .skills-container {
-            background: white;
-            padding: 40px;
-            border-radius: 30px;
+        /* Dark Mode Switch Button */
+        #theme-toggle {
+            background: none;
             border: 1px solid var(--border);
-            box-shadow: var(--shadow-base);
-            margin-bottom: 50px;
+            color: var(--text-muted);
+            padding: 8px;
+            border-radius: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
         }
+        #theme-toggle:hover {
+            background: var(--bg-badge);
+            color: var(--primary);
+            border-color: var(--primary);
+        }
+        
+        /* Verberg zon-icoon standaard, toon maan-icoon */
+        #theme-toggle .sun { display: none; }
+        #theme-toggle .moon { display: block; }
+
+        /* Als dark mode actief is, wissel de iconen */
+        body.dark-mode #theme-toggle .sun { display: block; }
+        body.dark-mode #theme-toggle .moon { display: none; }
+
+        /* --- Hero --- */
+        .hero {
+            padding: 100px 20px;
+            /* Subtiele gradient die ook in dark mode werkt */
+            background: radial-gradient(circle at top right, var(--bg-badge), var(--bg-body));
+            text-align: center;
+        }
+
+        .hero h1 { font-size: 4rem; margin: 0; color: var(--logo-color); letter-spacing: -2px; font-weight: 800; }
+        .hero p { font-size: 1.2rem; color: var(--text-muted); max-width: 600px; margin: 25px auto; }
+        
+        .badge-6icw {
+            background: var(--bg-badge);
+            color: var(--primary);
+            padding: 6px 16px;
+            border-radius: 100px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 1px solid var(--border);
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        /* --- Secties --- */
+        .section { padding: 100px 20px; max-width: 1100px; margin: 0 auto; scroll-margin-top: 80px; }
+        .section-title { font-size: 2.2rem; font-weight: 800; margin-bottom: 50px; text-align: center; color: var(--logo-color); letter-spacing: -1px; }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        /* --- Skill Card --- */
+        .skill-card {
+            background: var(--bg-card);
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
+        }
+        .skill-card:hover { border-color: var(--border-hover); }
 
         .skill-item { margin-bottom: 25px; }
-        .skill-info { display: flex; justify-content: space-between; font-weight: 700; margin-bottom: 8px; }
-        .skill-bar { height: 10px; background: #f1f5f9; border-radius: 20px; overflow: hidden; }
-        .skill-progress { 
-            height: 100%; 
-            background: var(--blue-accent); 
-            width: 0; /* Geanimeerd via JS */
-            border-radius: 20px; 
-            transition: width 1.5s cubic-bezier(0.17, 0.67, 0.83, 0.67);
-        }
+        .skill-info { display: flex; justify-content: space-between; margin-bottom: 10px; font-weight: 700; font-size: 0.95rem; color: var(--text-main); }
+        .skill-bar { height: 8px; background: var(--skill-bar-bg); border-radius: 10px; overflow: hidden; }
+        .skill-progress { height: 100%; background: var(--primary); border-radius: 10px; }
 
-        /* --- KAARTEN (EXPERTISE & PROJECTEN) --- */
-        .grid {
+        /* --- Projecten Sectie (Volledige breedte achtergrond) --- */
+        .projects-wrapper { background: var(--bg-section-muted); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+
+        .project-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 30px;
         }
 
-        .card {
-            background: #ffffff;
+        .project-card {
+            background: var(--bg-card);
             border: 1px solid var(--border);
             border-radius: 24px;
             padding: 40px;
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            flex-direction: column;
             position: relative;
-            box-shadow: var(--shadow-base);
-            opacity: 0; transform: translateY(30px); /* Voor scroll-reveal */
+            overflow: hidden;
+            height: 100%;
         }
 
-        .card.reveal { opacity: 1; transform: translateY(0); }
-
-        .card:hover {
-            transform: translateY(-12px);
-            box-shadow: var(--shadow-lift);
-            border-color: var(--blue-accent);
+        /* Effecten bij hover */
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary);
         }
 
-        /* Icoon "Lifting" Effect */
-        .icon-wrapper {
-            width: 60px; height: 60px;
-            background: #f1f5f9;
-            border-radius: 16px;
+        .icon-box {
+            width: 50px; height: 50px;
+            background: var(--bg-icon-box);
+            border: 1px solid var(--border);
+            border-radius: 12px;
             display: flex; align-items: center; justify-content: center;
-            color: var(--blue-accent);
-            margin-bottom: 25px;
-            animation: float 4s ease-in-out infinite;
+            color: var(--primary);
+            margin-bottom: 20px;
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-6px); }
+        .project-card h3 { margin: 10px 0; font-weight: 800; color: var(--logo-color); font-size: 1.4rem; letter-spacing: -0.5px; }
+        .project-card p { color: var(--text-muted); font-size: 1rem; margin-bottom: 30px; flex-grow: 1; }
+
+        .tech-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: auto; }
+        .tech-tag {
+            font-size: 0.75rem; font-weight: 700;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            background: var(--bg-badge);
+            padding: 4px 12px;
+            border-radius: 6px;
+            border: 1px solid var(--border);
         }
 
-        .card:hover .icon-wrapper {
-            transform: scale(1.1) translateY(-5px);
-            background: var(--blue-accent);
-            color: white;
-            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.3);
-        }
-
-        .card h3 { font-size: 1.4rem; margin: 10px 0; font-weight: 800; }
-        .card p { color: #64748b; font-size: 0.95rem; }
-
-        .tag {
-            font-size: 0.7rem; font-weight: 800;
-            color: var(--blue-accent); background: #eff6ff;
-            padding: 5px 12px; border-radius: 8px; text-transform: uppercase;
-        }
-
-        /* --- CONTACT SECTIE --- */
-        .cta-section {
-            background: var(--accent);
-            color: white;
+        /* --- Contact Box --- */
+        .contact-box {
+            background: var(--bg-contact-box);
+            color: #ffffff;
             padding: 80px 40px;
-            border-radius: 40px;
+            border-radius: 32px;
             text-align: center;
-            margin-top: 50px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border);
         }
+        
+        body.dark-mode .contact-box { background: var(--bg-card); }
 
-        .btn {
+        .btn-primary {
             display: inline-block;
-            background: var(--blue-accent);
-            color: white;
-            padding: 18px 45px;
-            border-radius: 15px;
+            background: var(--bg-btn-primary);
+            color: #ffffff;
+            padding: 16px 35px;
+            border-radius: 14px;
             text-decoration: none;
             font-weight: 700;
             margin-top: 25px;
+            box-shadow: var(--btn-shadow);
         }
 
-        .btn:hover { transform: scale(1.05); filter: brightness(1.1); }
+        .btn-primary:hover { transform: scale(1.05); box-shadow: var(--btn-shadow-hover); }
 
-        footer { text-align: center; padding: 60px; color: #94a3b8; font-size: 0.85rem; }
+        /* --- Footer --- */
+        footer {
+            padding: 60px 20px;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            font-weight: 500;
+            border-top: 1px solid var(--border);
+        }
 
+        /* --- Responsive --- */
+        @media (max-width: 768px) {
+            .about-grid { grid-template-columns: 1fr; gap: 40px; }
+            .hero h1 { font-size: 2.8rem; }
+            .hero { padding: 60px 20px; }
+            .nav-links { display: none; } /* Simpele verberging voor mobiel */
+        }
     </style>
 </head>
 <body>
@@ -176,116 +305,129 @@
     <nav>
         <div class="nav-container">
             <a href="#" class="logo">MARCUS.L</a>
-            <div class="nav-links">
-                <a href="#expertise">Expertise</a>
-                <a href="#projects">Projecten</a>
-                <a href="https://github.com/Marcus-2008" target="_blank">GitHub</a>
+            <div class="nav-right">
+                <div class="nav-links">
+                    <a href="#about">Expertise</a>
+                    <a href="#projects">Projecten</a>
+                    <a href="#contact">Contact</a>
+                </div>
+                <button id="theme-toggle" aria-label="Wissel donker/licht thema">
+                    <i data-lucide="sun" class="sun"></i>
+                    <i data-lucide="moon" class="moon"></i>
+                </button>
             </div>
         </div>
     </nav>
 
     <header class="hero">
-        <h1>Building the Future.</h1>
-        <p>Marcus Lambrechts — 6ICW Student. Focus op technische innovatie, Python-backend systemen en robuuste netwerkarchitectuur.</p>
+        <span class="badge-6icw">Informatica & Communicatiewetenschappen</span>
+        <h1>Marcus Lambrechts</h1>
+        <p>Analytisch ingesteld, technisch gedreven. Gespecialiseerd in Python development en netwerkarchitectuur.</p>
+        <a href="#projects" class="btn-primary">Projecten bekijken</a>
     </header>
 
-    <div id="expertise" class="container">
+    <section id="about" class="section">
         <h2 class="section-title">Technische Expertise</h2>
-        
-        <div class="skills-container">
-            <div class="skill-item">
-                <div class="skill-info"><span>Python & Backend Logic</span><span>90%</span></div>
-                <div class="skill-bar"><div class="skill-progress" data-width="90%"></div></div>
+        <div class="about-grid">
+            <div>
+                <p>Als student in de richting <strong>6ICW</strong> combineer ik programmeerlogica met systeemkennis. Mijn aanpak is gebaseerd op nauwkeurigheid en het continu optimaliseren van processen.</p>
+                <p>Ik focus me op schaalbare oplossingen, of het nu gaat om een Python script voor motorsturing of het configureren van een secure bedrijfsnetwerk.</p>
             </div>
-            <div class="skill-item">
-                <div class="skill-info"><span>Cisco & Networking</span><span>80%</span></div>
-                <div class="skill-bar"><div class="skill-progress" data-width="80%"></div></div>
-            </div>
-            <div class="skill-item">
-                <div class="skill-info"><span>Modern Web Design (UI/UX)</span><span>85%</span></div>
-                <div class="skill-bar"><div class="skill-progress" data-width="85%"></div></div>
-            </div>
-        </div>
-
-        <div class="grid">
-            <div class="card scroll-trigger">
-                <div class="icon-wrapper"><i data-lucide="terminal"></i></div>
-                <h3>Programmeren</h3>
-                <p>Schrijven van clean code in Python voor hardware-aansturing en data-analyse.</p>
-            </div>
-            <div class="card scroll-trigger">
-                <div class="icon-wrapper"><i data-lucide="network"></i></div>
-                <h3>Infrastructuur</h3>
-                <p>Configuratie van Cisco-netwerken met een focus op beveiliging en VLAN-segmentatie.</p>
-            </div>
-            <div class="card scroll-trigger">
-                <div class="icon-wrapper"><i data-lucide="layers"></i></div>
-                <h3>Systeembeheer</h3>
-                <p>Onderhoud en beheer van IT-systemen binnen een professionele 6ICW omgeving.</p>
+            <div class="skill-card">
+                <div class="skill-item">
+                    <div class="skill-info"><span>Python & Development</span><span>90%</span></div>
+                    <div class="skill-bar"><div class="skill-progress" style="width: 90%;"></div></div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-info"><span>Cisco Networking</span><span>80%</span></div>
+                    <div class="skill-bar"><div class="skill-progress" style="width: 80%;"></div></div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-info"><span>Frontend (CSS/HTML)</span><span>85%</span></div>
+                    <div class="skill-bar"><div class="skill-progress" style="width: 85%;"></div></div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-info"><span>Database Management</span><span>75%</span></div>
+                    <div class="skill-bar"><div class="skill-progress" style="width: 75%;"></div></div>
+                </div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <div id="projects" style="background: white;">
-        <div class="container">
-            <h2 class="section-title">Geselecteerde Projecten</h2>
-            <div class="grid">
-                <div class="card scroll-trigger">
-                    <div class="icon-wrapper"><i data-lucide="cpu"></i></div>
+    <div class="projects-wrapper">
+        <section id="projects" class="section">
+            <h2 class="section-title">Geselecteerd Werk</h2>
+            <div class="project-grid">
+                
+                <div class="project-card">
+                    <div class="icon-box"><i data-lucide="cpu"></i></div>
                     <h3>F24 Motorsturing</h3>
-                    <p>Automatisatieproject voor motor-units. Gebruik van seriële data voor monitoring en controle.</p>
-                    <span class="tag">Hardware / Python</span>
+                    <p>Ontwikkeling van een controlesysteem voor F24 motor-units. Implementatie van seriële monitoring en failsafe logica voor industriële simulaties.</p>
+                    <div class="tech-tags"><span class="tech-tag">Python</span> <span class="tech-tag">Embedded</span></div>
                 </div>
-                <div class="card scroll-trigger">
-                    <div class="icon-wrapper"><i data-lucide="github"></i></div>
-                    <h3>GitHub Portfolio</h3>
-                    <p>Het beheren van complexe codebases en professionele documentatie via Git.</p>
-                    <span class="tag">Version Control</span>
+
+                <div class="project-card">
+                    <div class="icon-box"><i data-lucide="github"></i></div>
+                    <h3>Portfolio Hub</h3>
+                    <p>Mijn centrale punt op GitHub. Een high-performance omgeving geoptimaliseerd voor UX, met een focus op clean design en versiebeheer.</p>
+                    <div class="tech-tags"><span class="tech-tag">Web</span> <span class="tech-tag">Git</span></div>
                 </div>
-                <div class="card scroll-trigger">
-                    <div class="icon-wrapper"><i data-lucide="shield-check"></i></div>
-                    <h3>Enterprise Security</h3>
-                    <p>Audit van netwerkbeveiliging en implementatie van firewalls in lab-omgevingen.</p>
-                    <span class="tag">Cisco / CCNA</span>
+
+                <div class="project-card">
+                    <div class="icon-box"><i data-lucide="network"></i></div>
+                    <h3>Enterprise Lab</h3>
+                    <p>Configuratie van complexe netwerkinfrastructuren. VLAN-segmentatie, routing protocollen en security auditing binnen Cisco omgevingen.</p>
+                    <div class="tech-tags"><span class="tech-tag">Cisco</span> <span class="tech-tag">Security</span></div>
                 </div>
+
             </div>
-        </div>
+        </section>
     </div>
 
-    <div class="container">
-        <div class="cta-section">
-            <h2 style="margin:0; font-size: 2.2rem;">Klaar voor de volgende stap?</h2>
-            <p style="color: #94a3b8; margin-top: 15px;">Ik sta open voor nieuwe projecten en technische uitdagingen.</p>
-            <a href="https://github.com/Marcus-2008" target="_blank" class="btn">Bekijk mijn Repository</a>
+    <section id="contact" class="section">
+        <div class="contact-box">
+            <h2 style="color: white; margin-bottom: 20px; letter-spacing: -1px;">Samenwerken aan een project?</h2>
+            <p style="color: var(--contact-text); margin-bottom: 30px;">Ik ben altijd op zoek naar nieuwe technische uitdagingen en professionele groei in de IT-sector.</p>
+            <a href="https://github.com/Marcus-2008" class="btn-primary" target="_blank">Bekijk mijn GitHub</a>
         </div>
-    </div>
+    </section>
 
     <footer>
-        &copy; 2026 Marcus Lambrechts &bull; Gerealiseerd binnen 6ICW &bull; België
+        &copy; 2026 Marcus Lambrechts &bull; 6ICW &bull; Mechelen, België
     </footer>
 
     <script>
-        // Start de icoontjes
+        // --- 1. Activeer de Lucide icoontjes ---
         lucide.createIcons();
 
-        // Scroll Reveal Logica
-        const observerOptions = { threshold: 0.1 };
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('reveal');
-                    // Als het een skill bar is, animeer de breedte
-                    if (entry.target.classList.contains('skill-progress')) {
-                        const width = entry.target.getAttribute('data-width');
-                        entry.target.style.width = width;
-                    }
-                }
-            });
-        }, observerOptions);
+        // --- 2. Dark Mode Functionaliteit ---
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
 
-        // Elementen selecteren om te observeren
-        document.querySelectorAll('.scroll-trigger, .card, .skill-progress').forEach(el => {
-            observer.observe(el);
+        // Controleer op opgeslagen voorkeur in localStorage
+        const currentTheme = localStorage.getItem('theme');
+
+        // Als er een thema is opgeslagen, pas het toe
+        if (currentTheme) {
+            body.classList.add(currentTheme);
+        } else {
+            // Optioneel: Controleer of de browser van de gebruiker op dark mode staat
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                body.classList.add('dark-mode');
+            }
+        }
+
+        // Event listener voor de klik op de knop
+        themeToggle.addEventListener('click', () => {
+            // Toggle de klasse
+            body.classList.toggle('dark-mode');
+            
+            // Sla de voorkeur op
+            if (body.classList.contains('dark-mode')) {
+                localStorage.setItem('theme', 'dark-mode');
+            } else {
+                localStorage.setItem('theme', 'light-mode'); // Of verwijder het item
+            }
         });
     </script>
 </body>
